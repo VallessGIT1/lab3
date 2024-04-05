@@ -1,0 +1,14 @@
+/Users/v.nigmatullin/RiderProjects/Lab3/Client/bin/Debug/net8.0/Client
+/Users/v.nigmatullin/RiderProjects/Lab3/Client/bin/Debug/net8.0/Client.deps.json
+/Users/v.nigmatullin/RiderProjects/Lab3/Client/bin/Debug/net8.0/Client.runtimeconfig.json
+/Users/v.nigmatullin/RiderProjects/Lab3/Client/bin/Debug/net8.0/Client.dll
+/Users/v.nigmatullin/RiderProjects/Lab3/Client/bin/Debug/net8.0/Client.pdb
+/Users/v.nigmatullin/RiderProjects/Lab3/Client/obj/Debug/net8.0/Client.GeneratedMSBuildEditorConfig.editorconfig
+/Users/v.nigmatullin/RiderProjects/Lab3/Client/obj/Debug/net8.0/Client.AssemblyInfoInputs.cache
+/Users/v.nigmatullin/RiderProjects/Lab3/Client/obj/Debug/net8.0/Client.AssemblyInfo.cs
+/Users/v.nigmatullin/RiderProjects/Lab3/Client/obj/Debug/net8.0/Client.csproj.CoreCompileInputs.cache
+/Users/v.nigmatullin/RiderProjects/Lab3/Client/obj/Debug/net8.0/Client.dll
+/Users/v.nigmatullin/RiderProjects/Lab3/Client/obj/Debug/net8.0/refint/Client.dll
+/Users/v.nigmatullin/RiderProjects/Lab3/Client/obj/Debug/net8.0/Client.pdb
+/Users/v.nigmatullin/RiderProjects/Lab3/Client/obj/Debug/net8.0/Client.genruntimeconfig.cache
+/Users/v.nigmatullin/RiderProjects/Lab3/Client/obj/Debug/net8.0/ref/Client.dll
