@@ -9,6 +9,7 @@ namespace Server.server;
 
 public static class Server
 {
+    
     private const int Port = 9999;
     private const int MaxThreads = 20;
     
