@@ -12,3 +12,18 @@
 /Users/v.nigmatullin/RiderProjects/Lab3/Client/obj/Debug/net8.0/Client.pdb
 /Users/v.nigmatullin/RiderProjects/Lab3/Client/obj/Debug/net8.0/Client.genruntimeconfig.cache
 /Users/v.nigmatullin/RiderProjects/Lab3/Client/obj/Debug/net8.0/ref/Client.dll
+C:\Users\Мой повелитель\RiderProjects\lab33\Client\bin\Debug\net8.0\Client.exe
+C:\Users\Мой повелитель\RiderProjects\lab33\Client\bin\Debug\net8.0\Client.deps.json
+C:\Users\Мой повелитель\RiderProjects\lab33\Client\bin\Debug\net8.0\Client.runtimeconfig.json
+C:\Users\Мой повелитель\RiderProjects\lab33\Client\bin\Debug\net8.0\Client.dll
+C:\Users\Мой повелитель\RiderProjects\lab33\Client\bin\Debug\net8.0\Client.pdb
+C:\Users\Мой повелитель\RiderProjects\lab33\Client\obj\Debug\net8.0\Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Мой повелитель\RiderProjects\lab33\Client\obj\Debug\net8.0\Client.AssemblyInfoInputs.cache
+C:\Users\Мой повелитель\RiderProjects\lab33\Client\obj\Debug\net8.0\Client.AssemblyInfo.cs
+C:\Users\Мой повелитель\RiderProjects\lab33\Client\obj\Debug\net8.0\Client.csproj.CoreCompileInputs.cache
+C:\Users\Мой повелитель\RiderProjects\lab33\Client\obj\Debug\net8.0\Client.sourcelink.json
+C:\Users\Мой повелитель\RiderProjects\lab33\Client\obj\Debug\net8.0\Client.dll
+C:\Users\Мой повелитель\RiderProjects\lab33\Client\obj\Debug\net8.0\refint\Client.dll
+C:\Users\Мой повелитель\RiderProjects\lab33\Client\obj\Debug\net8.0\Client.pdb
+C:\Users\Мой повелитель\RiderProjects\lab33\Client\obj\Debug\net8.0\Client.genruntimeconfig.cache
+C:\Users\Мой повелитель\RiderProjects\lab33\Client\obj\Debug\net8.0\ref\Client.dll

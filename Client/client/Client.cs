@@ -1,90 +1,78 @@
-﻿using System.Net;
+﻿using System;
+using System.IO;
 using System.Net.Sockets;
 using System.Text;
-using System.Text.RegularExpressions;
-using Client.client.builder;
 
-namespace Client.client;
-
-public static partial class Client
+namespace Client.client
 {
-    public const string AbsoluteDataPath = "/Users/v.nigmatullin/RiderProjects/Lab3/Client/client/data";
-    private const int Port = 9999;
-
-    private static Socket? _socket;
-
-    private static readonly List<ICommandBuilder> CommandBuilders =
-    [
-        new PutCommandBuilder(),
-        new GetCommandBuilder(),
-        new DeleteCommandBuilder(),
-        new ExitCommandBuilder()
-    ];
-
-    private static void Main()
+    class Client
     {
-        try
+        static void Main()
         {
-            var ipPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), Port);
-            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            _socket.Connect(ipPoint);
+            var client = new TcpClient("127.0.0.1", 5432);
+            var stream = client.GetStream();
 
-            Console.Write($"Введите действие ({GetAllLabels()}): ");
-            var command = Console.ReadLine();
+            Console.Write("Введите действие (GET/PUT/DELETE/EXIT): ");
+            string? action = Console.ReadLine();
+            string? fileName = null;
+            string? fileContent = null;
 
-            BuildAndSendCommand(command);
-            _socket.Close();
+
+            switch (action)
+            {
+                case "PUT":
+                    Console.Write("Введите имя файла:");
+                    fileName = Console.ReadLine();
+                    Console.WriteLine("Введите содержимое файла:");
+                    fileContent = Console.ReadLine();
+                    break;
+                case "DELETE":
+                    Console.Write("Введите имя файла:");
+                    fileName = Console.ReadLine();
+                    break;
+                case "GET":
+                    Console.Write("Введите имя файла:");
+                    fileName = Console.ReadLine();
+                    break;
+                case "EXIT":
+                    Environment.Exit(0);
+                    break;
+                default:
+                    Console.WriteLine("Неправильный запрос");
+                    Environment.Exit(0);
+                    break;
+            }
+            
+            var request = $"{action} {fileName} {fileContent}";
+            byte[] data = System.Text.Encoding.ASCII.GetBytes(request);
+
+            // Отправка запроса на сервер
+            stream.Write(data, 0, data.Length);
+            Console.WriteLine("Запрос отправлен");
+
+            // Получение ответа от сервера
+            data = new Byte[256];
+            var responseData = String.Empty;
+            var bytes = stream.Read(data, 0, data.Length);
+            responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+
+            // Обработка ответа
+            if (responseData == "200")
+            {
+                Console.WriteLine("Ответ сервера: The response says that the file was created!");
+            }
+            else if (responseData == "403")
+            {
+                Console.WriteLine("Ответ сервера: The response says that creating the file was forbidden!");
+            }
+            else
+            {
+                Console.WriteLine("Неожиданный ответ сервера: " + responseData);
+            }
+
+            stream.Close();
+            client.Close();
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
     }
-
-    private static string GetAllLabels()
-    {
-        return string.Join("/", CommandBuilders.ConvertAll(executor => executor.GetLabel()));
-    }
-
-    private static void BuildAndSendCommand(string? command)
-    {
-        var executor = CommandBuilders.Find(executor => command == executor.GetLabel());
-        if (executor == null)
-        {
-            Console.WriteLine("Ошибка: Команда не найдена!");
-            return;
-        }
-
-        executor.Run();
-    }
-
-    public static string Read()
-    {
-        var builder = new StringBuilder();
-        var data = new byte[256];
-
-        do
-        {
-            var bytes = _socket!.Receive(data);
-            builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
-        } while (_socket.Available > 0);
-
-        return builder.ToString();
-    }
-
-    public static void Send(string response)
-    {
-        var data = Encoding.Unicode.GetBytes(response);
-        _socket?.Send(data);
-    }
-
-    public static bool ValidateFileName(string? fileName)
-    {
-        if (fileName != null && FileNameRegex().IsMatch(fileName)) return true;
-        Console.WriteLine("Ошибка: Невалидное имя файла!");
-        return false;
-    }
-
-    [GeneratedRegex("^[^~)('!*<>:;,?\"*|/]+$")]
-    private static partial Regex FileNameRegex();
 }
+
