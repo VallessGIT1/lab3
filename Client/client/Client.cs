@@ -35,7 +35,6 @@ namespace Client.client
                     fileName = Console.ReadLine();
                     break;
                 case "EXIT":
-                    Environment.Exit(0);
                     break;
                 default:
                     Console.WriteLine("Неправильный запрос");
@@ -55,21 +54,56 @@ namespace Client.client
             var responseData = String.Empty;
             var bytes = stream.Read(data, 0, data.Length);
             responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-
+            string[] responseDataParse = responseData.Split(' ');
             // Обработка ответа
-            if (responseData == "200")
+            switch (action)
             {
-                Console.WriteLine("Ответ сервера: The response says that the file was created!");
+                case "PUT":
+                    if (responseDataParse[0] == "200")
+                    {
+                        Console.WriteLine("Ответ сервера: The response says that the file was created!");
+                    }
+                    else if (responseDataParse[0] == "403")
+                    {
+                        Console.WriteLine("Ответ сервера:  The response says that creating the file was forbidden!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Неожиданный ответ сервера: " + responseData);
+                    }
+                    break;
+                case "DELETE":
+                    if (responseDataParse[0] == "200")
+                    {
+                        Console.WriteLine("Ответ сервера: The response says that the file was successfully deleted!");
+                    }
+                    
+                    else if(responseDataParse[0] == "404")
+                    {
+                        Console.WriteLine("Ответ сервера:    The response says that the file was not found!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Неожиданный ответ сервера: " + responseData);
+                    }
+                    break;
+                case "GET":
+                    if (responseDataParse[0] == "200")
+                    {
+                        Console.WriteLine("Ответ сервера: The content of the file is: " + responseDataParse[1]);
+                    }
+                    
+                    else if(responseDataParse[0] == "404")
+                    {
+                        Console.WriteLine("Ответ сервера:   The response says that the file was not found!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Неожиданный ответ сервера: " + responseData);
+                    }
+                    break;
             }
-            else if (responseData == "403")
-            {
-                Console.WriteLine("Ответ сервера: The response says that creating the file was forbidden!");
-            }
-            else
-            {
-                Console.WriteLine("Неожиданный ответ сервера: " + responseData);
-            }
-
+            
             stream.Close();
             client.Close();
         }

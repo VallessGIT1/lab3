@@ -1,7 +1,10 @@
-﻿using System.Net;
+﻿using System;
+using System.IO;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
-namespace Server.server 
+
+namespace MyServer
 {
     public static class Server
     {
@@ -19,12 +22,15 @@ namespace Server.server
                 server = new TcpListener(localAddr, port);
                 server.Start();
 
-                var dataPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data");
+                var dataPath = Path.Combine("C:\\Users\\Мой повелитель\\RiderProjects\\lab33\\Server\\server\\data");
 
                 while (true)
                 {
+                    Console.WriteLine("Waiting for a client to connect...");
                     var client = server.AcceptTcpClient();
+                    Console.WriteLine("Client connected!");
                     var stream = client.GetStream();
+                    
 
                     var data = new byte[256];
                     var bytesRead = stream.Read(data, 0, data.Length);
@@ -36,6 +42,7 @@ namespace Server.server
                         string fileName = requestData[1];
                         string fileContent = requestData[2];
                         string filePath = Path.Combine(dataPath, fileName);
+                        Console.WriteLine("\n" + fileName + "\n");
 
                         if (File.Exists(filePath))
                         {
@@ -85,6 +92,11 @@ namespace Server.server
                             stream.Write(response, 0, response.Length);
                         }
                     }
+                    else if (request.StartsWith("EXIT"))
+                    {
+                        client.Close();
+                        Environment.Exit(0);
+                    }
 
                     client.Close();
                 }
@@ -95,7 +107,7 @@ namespace Server.server
             }
             finally
             {
-             server.Stop();
+                server.Stop();
             }
         }
     }
