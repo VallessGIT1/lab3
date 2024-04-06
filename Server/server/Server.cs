@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Sockets;
 using System.Text;
-namespace Server
+namespace Server.server 
 {
     public static class Server
     {
@@ -13,7 +13,7 @@ namespace Server
                 Console.WriteLine("Server started!");
 
                 // Установка сервера
-                var port = 5432;
+                var port = 8888;
                 var localAddr = IPAddress.Parse("127.0.0.1");
 
                 server = new TcpListener(localAddr, port);

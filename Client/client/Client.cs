@@ -9,7 +9,7 @@ namespace Client.client
     {
         static void Main()
         {
-            var client = new TcpClient("127.0.0.1", 5432);
+            var client = new TcpClient("127.0.0.1", 8888);
             var stream = client.GetStream();
 
             Console.Write("Введите действие (GET/PUT/DELETE/EXIT): ");
